@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+    <meta name="theme-color" content="#e61e2a"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <style>
+        @layer base {
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                overscroll-behavior: none;
+            }
+            main> :first-child {
+                margin-top: 0 !important;
+            }
+            main> :last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#e61e2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-container": "#fefefe",
+                        "on-secondary-fixed-variant": "#004491",
+                        "surface-container-high": "#2a2a2a",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary": "#680009",
+                        "on-surface-variant": "#e7bdb9",
+                        "on-tertiary": "#2f3131",
+                        "surface-container-highest": "#353534",
+                        "primary-fixed-dim": "#ffb3ad",
+                        "surface": "#131313",
+                        "secondary": "#acc7ff",
+                        "secondary-fixed-dim": "#acc7ff",
+                        "on-surface": "#e5e2e1",
+                        "primary": "#ffb3ad",
+                        "on-error": "#690005",
+                        "background": "#131313",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-secondary-container": "#bcd1ff",
+                        "outline": "#ae8884",
+                        "on-primary-fixed-variant": "#930011",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-fixed": "#001a40",
+                        "on-primary-container": "#fffeff",
+                        "on-secondary": "#002f67",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#747676",
+                        "inverse-primary": "#c0001a",
+                        "tertiary": "#c6c6c7",
+                        "error-container": "#93000a",
+                        "surface-variant": "#353534",
+                        "surface-dim": "#131313",
+                        "secondary-container": "#0257b4",
+                        "outline-variant": "#5d3f3c",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-tint": "#ffb3ad",
+                        "on-primary-fixed": "#410003",
+                        "inverse-on-surface": "#313030",
+                        "surface-bright": "#393939",
+                        "surface-container": "#201f1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "24px",
+                        "stack-lg": "48px",
+                        "margin-desktop": "40px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-bold": ["Montserrat"],
+                        "label-sm": ["Montserrat"],
+                        "headline-md": ["Oswald"],
+                        "body-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Oswald"],
+                        "headline-xl": ["Oswald"],
+                        "headline-lg": ["Oswald"]
+                    },
+                    "fontSize": {
+                        "label-bold": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-xl": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Oswald:wght@100..900&amp;display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-background font-body-md text-on-surface">
+    <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b-2 border-primary-container">
+        <div class="h-20 w-full px-margin-desktop flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="h-12 w-12 flex items-center justify-center bg-primary-container p-1 rounded-full overflow-hidden shadow-[4px_4px_0px_0px_#0257b4]">
+                    <img alt="Mercy Roll Nation" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLsy-IMbt9Wg9a7-YXTKwK6l3EM_q8ZjqGl46OM0CZtqF_mHtZGGDtwgIqAiAfl241D--3tcSdXfaE_FUMYjFxmkuem9G9WnKlyJKxv3sajdWi8JUZwPm12DfqLg4PB8hg_lieUITjlw35a8cmbIX2TsGQ4ZY8ul_KI-B1dxRzf2O1-r8FzByAMOQouwBUFA2QPpo0dcJHLNoK_I5xWwUWyuFp5haxM7lCggE-EEEXBS9_6zMHSmHtqgOchTvIt90RuHii_vxZ3xiYs">
+                </div>
+                <span class="font-headline-md text-headline-md uppercase tracking-wider text-on-surface">Mercy Roll <span class="text-primary-container">Nation</span></span>
+            </div>
+            <nav class="hidden md:flex items-center gap-stack-lg" data-active-classes="text-primary-container font-label-bold">
+                <a class="font-label-bold text-label-bold uppercase transition-all text-on-surface-variant hover:text-primary" data-path="home" href="index.html">Home</a>
+                <a class="font-label-bold text-label-bold uppercase transition-all text-on-surface-variant hover:text-primary" data-path="about" href="about.html">About Us</a>
+                <a class="font-label-bold text-label-bold uppercase transition-all text-on-surface-variant hover:text-primary" data-path="gallery" href="gallery.html">Gallery</a>
+                <a aria-current="page" class="uppercase transition-all text-primary-container font-label-bold" data-path="shop" href="shop.html">Shop</a>
+                <a class="font-label-bold text-label-bold uppercase transition-all text-on-surface-variant hover:text-primary" data-path="contact" href="contact.html">Contact</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-on-surface cursor-pointer">search</span>
+                <img alt="Profile" class="w-8 h-8 rounded-full object-cover border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida/AP1WRLsy-IMbt9Wg9a7-YXTKwK6l3EM_q8ZjqGl46OM0CZtqF_mHtZGGDtwgIqAiAfl241D--3tcSdXfaE_FUMYjFxmkuem9G9WnKlyJKxv3sajdWi8JUZwPm12DfqLg4PB8hg_lieUITjlw35a8cmbIX2TsGQ4ZY8ul_KI-B1dxRzf2O1-r8FzByAMOQouwBUFA2QPpo0dcJHLNoK_I5xWwUWyuFp5haxM7lCggE-EEEXBS9_6zMHSmHtqgOchTvIt90RuHii_vxZ3xiYs">
+            </div>
+        </div>
+    </header>
+
+    <main class="w-full pt-20">
+        <div class="flex flex-col w-full relative">
+            <!-- Decorative background elements -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-container/10 rounded-full blur-[100px]"></div>
+                <div class="absolute top-1/3 -right-32 w-[500px] h-[500px] bg-secondary-container/5 rounded-full blur-[120px]"></div>
+                <div class="absolute -bottom-48 left-1/4 w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-[150px]"></div>
+            </div>
+            <!-- Hero Section -->
+            <section class="relative w-full pt-stack-lg pb-stack-lg px-margin-desktop z-10 flex flex-col md:flex-row items-center gap-stack-lg">
+                <div class="flex-1 flex flex-col gap-unit z-10">
+                    <div class="flex items-center gap-4 mb-2">
+                        <div class="h-[2px] w-12 bg-primary-container shadow-[2px_2px_0px_0px_#0257b4]"></div>
+                        <span class="font-label-bold text-label-bold text-primary-container uppercase tracking-[0.2em]">Official Store</span>
+                    </div>
+                    <h1 class="font-headline-xl text-headline-xl text-on-surface uppercase leading-none drop-shadow-[4px_4px_0px_#e61e2a]">PRO GEAR FOR<br>THE NATION</h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mt-4 border-l-4 border-secondary-container pl-4">Equip yourself with the same grit and grace that built our community. Premium hardware and apparel designed for the concrete jungle.</p>
+                    <div class="mt-stack-md flex gap-4">
+                        <button class="bg-primary-container text-on-primary-container px-8 py-4 border-2 border-primary-container font-label-bold text-label-bold uppercase hover:bg-transparent hover:text-primary-container transition-all shadow-[4px_4px_0px_0px_#000] relative overflow-hidden group">
+                            <span class="relative z-10">Shop Hardware</span>
+                            <div class="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0"></div>
+                        </button>
+                        <button class="bg-transparent text-on-surface px-8 py-4 border-2 border-outline-variant font-label-bold text-label-bold uppercase hover:border-primary-container hover:text-primary-container transition-all">
+                            Apparel
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-1 w-full relative">
+                    <div class="relative w-full aspect-square md:aspect-[4/3] transform rotate-[-2deg] z-10 shadow-[8px_8px_0px_0px_#e61e2a]">
+                        <div class="absolute inset-0 bg-cover bg-center border-4 border-surface-container" data-alt="High energy urban action shot of a roller skater mid-jump in a gritty city environment at dusk. Neon lights reflecting off wet pavement. Deep reds and dark blues dominating the color palette. High contrast, dynamic angle." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCFYQxsmvnqm5MgUM-dHgt9xwRwYtAV-vTUvCyJewR-HdWxQ5XK5K3uwdNF1QAZpHFmXaUyxEjOnyLrjJGwnkX-YbhXPkVmH3rec0-C7uYtROzImUFSVBTW_Pm4M36XJKsNDnWmZVg7UkIf3OkEmv34DPkr__hIvmyK4_0SaiOwhkFOu64MvFcuczFFcltnOBrOt3SiioJeG4VBNhMCr-d19Gim3mgCeLjw5YSwyaTeouKexnRnqo4QbQ')">
+                        </div>
+                        <!-- Overlay badge -->
+                        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-secondary-container rounded-full flex flex-col items-center justify-center border-4 border-surface shadow-[4px_4px_0px_0px_#e61e2a] transform rotate-12 z-20">
+                            <span class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary-container leading-none">NEW</span>
+                            <span class="font-label-bold text-label-bold text-on-primary-container uppercase">Arrivals</span>
+                        </div>
+                    </div>
+                    <!-- Decorative background shape for hero image -->
+                    <div class="absolute inset-0 bg-primary-container/20 transform rotate-3 translate-x-4 translate-y-4 z-0"></div>
+                </div>
+            </section>
+            <!-- Categories / Filters -->
+            <section class="w-full px-margin-desktop py-stack-md z-10">
+                <div class="flex flex-wrap items-center gap-4 pb-4 overflow-x-auto no-scrollbar border-b-2 border-outline-variant">
+                    <button class="bg-primary-container text-on-primary-container px-6 py-2 border-2 border-primary-container font-label-bold text-label-bold uppercase shadow-[2px_2px_0px_0px_#000]">All Gear</button>
+                    <button class="bg-surface-container text-on-surface px-6 py-2 border-2 border-transparent hover:border-outline-variant font-label-bold text-label-bold uppercase transition-all">Skates</button>
+                    <button class="bg-surface-container text-on-surface px-6 py-2 border-2 border-transparent hover:border-outline-variant font-label-bold text-label-bold uppercase transition-all">Wheels &amp; Parts</button>
+                    <button class="bg-surface-container text-on-surface px-6 py-2 border-2 border-transparent hover:border-outline-variant font-label-bold text-label-bold uppercase transition-all">Protection</button>
+                    <button class="bg-surface-container text-on-surface px-6 py-2 border-2 border-transparent hover:border-outline-variant font-label-bold text-label-bold uppercase transition-all flex items-center gap-2">
+                        Merch &amp; Apparel <span class="bg-primary-container text-on-primary-container text-[10px] px-2 py-0.5 ml-1">HOT</span>
+                    </button>
+                </div>
+            </section>
+            <!-- Product Grid -->
+            <section class="w-full px-margin-desktop py-stack-lg z-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                    <!-- Product 1 -->
+                    <article class="bg-surface-container flex flex-col group relative overflow-hidden transition-transform duration-300 hover:-translate-y-2 shadow-md hover:shadow-xl hover:shadow-primary-container/20">
+                        <!-- Accent Bar -->
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container z-20"></div>
+                        <div class="relative w-full aspect-square bg-surface-container-high overflow-hidden">
+                            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100" data-alt="Product photography of high-performance urban inline skates against a stark black background. Matte black boot with vivid red wheels and blue accent hardware. Dramatic studio lighting emphasizing the textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHGhW9uadjkb6eTN92AwR9fQW2DhFy-EGy9Ll7Cf_BZkKVrIpmDOlomyD9gsQTm3juDj4H50iyO2MOvZbyFN97JCeSYtY5D8ksgevjm-qvYcuIySBmFBMPJrdeNHFDAal_AER7WkiB6PPYTdGszSKUU1eZ5Nw3ixzTqyXqwyWLXPY7AO-Uu4-Hnqg-jtpq0HIcYTZzlUIaeJfddhhBa24uL9CAZ68w_C1XYeVYU1ytlgpJZ9zgcvujsA">
+                            <div class="absolute top-4 right-4 bg-error text-on-error px-3 py-1 font-label-bold text-label-bold uppercase border-2 border-error shadow-[2px_2px_0px_0px_#000] z-10">
+                                Pro Pick
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-1 z-10 relative bg-surface-container">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-headline-md text-headline-md text-on-surface uppercase leading-tight line-clamp-2 pr-4 group-hover:text-primary-container transition-colors">Apex Urban Skates</h3>
+                            </div>
+                            <p class="font-body-md text-body-md text-on-surface-variant text-sm mb-4">Carbon fiber shell, 80mm high-rebound wheels, precision bearings.</p>
+                            <div class="mt-auto pt-4 border-t-2 border-outline-variant/30 flex gap-2">
+                                <a class="flex-1 bg-transparent border-2 border-on-surface text-on-surface py-2 font-label-bold text-label-bold uppercase hover:bg-on-surface hover:text-surface transition-all group-hover:border-primary-container group-hover:bg-primary-container group-hover:text-on-primary-container shadow-[2px_2px_0px_0px_transparent] group-hover:shadow-[2px_2px_0px_0px_#000] text-center" href="https://wa.me/254703169974?text=I'm%20interested%20in%20negotiating%20for%20the%20Apex%20Urban%20Skates">Negotiate via WhatsApp</a>
+                                <button class="w-10 h-10 flex items-center justify-center border-2 border-outline-variant text-on-surface-variant hover:border-secondary-container hover:text-secondary-container transition-all bg-surface-container">
+                                    <span class="material-symbols-outlined text-lg">favorite</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Product 2 -->
+                    <article class="bg-surface-container flex flex-col group relative overflow-hidden transition-transform duration-300 hover:-translate-y-2 shadow-md hover:shadow-xl hover:shadow-primary-container/20">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container z-20"></div>
+                        <div class="relative w-full aspect-square bg-surface-container-high overflow-hidden">
+                            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100" data-alt="Streetwear style photograph of a heavy cotton black hoodie with a bold Mercy Roll Nation logo across the chest in striking red. The hoodie is laid flat or worn by a model in a dimly lit, gritty alleyway setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4NTpUbi2LdTHCdu3tTJJzDNhWSgs7FmV54MWunKnOlJLnYk_2XE0d1I7-zjEl9VYXmMckTaq2Jpd46sqqMi9tQ2rUvFlxdHvEDZ5wKIvIdf0UQ0GadhApYJ1CM-jy4MVmzh21vHvVs93AL8F_gJcgwG-rrWAKRWVWmuTvDivt0i7ZiVciRQE9plVpBfH-vJgt0gwXLj8ADiNEllaAuC44eXzOy1U7EN8O4eU7QzRXA1zB6FNts9OJ-A">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1 z-10 relative bg-surface-container">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-headline-md text-headline-md text-on-surface uppercase leading-tight line-clamp-2 pr-4 group-hover:text-secondary-container transition-colors">Nation Signature Hoodie</h3>
+                            </div>
+                            <p class="font-body-md text-body-md text-on-surface-variant text-sm mb-4">Heavyweight 400gsm cotton. Oversized fit. Built for the session.</p>
+                            <div class="mt-auto pt-4 border-t-2 border-outline-variant/30 flex gap-2">
+                                <a class="flex-1 bg-transparent border-2 border-on-surface text-on-surface py-2 font-label-bold text-label-bold uppercase hover:bg-on-surface hover:text-surface transition-all group-hover:border-secondary-container group-hover:bg-secondary-container group-hover:text-on-secondary-container shadow-[2px_2px_0px_0px_transparent] group-hover:shadow-[2px_2px_0px_0px_#000] text-center" href="https://wa.me/254703169974?text=I'm%20interested%20in%20negotiating%20for%20the%20Nation%20Signature%20Hoodie">Negotiate via WhatsApp</a>
+                                <button class="w-10 h-10 flex items-center justify-center border-2 border-outline-variant text-on-surface-variant hover:border-secondary-container hover:text-secondary-container transition-all bg-surface-container">
+                                    <span class="material-symbols-outlined text-lg">favorite</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Product 3 -->
+                    <article class="bg-surface-container flex flex-col group relative overflow-hidden transition-transform duration-300 hover:-translate-y-2 shadow-md hover:shadow-xl hover:shadow-primary-container/20">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container z-20"></div>
+                        <div class="relative w-full aspect-square bg-surface-container-high overflow-hidden">
+                            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100" data-alt="Close up product shot of black knee and elbow pads designed for aggressive skating. Hard plastic caps with scuffs indicating durability, thick padding, red stitching details. Dark, high contrast lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqDslHh_mwBQqv1OUtZzkA0lZmTyUrzsa5qXbJoiw5h12rzrT390FSIGoOmfEZ8deL1R0oBUpXqdYWF8vWHYkvonsNLo7jiop6HGY_z-BeilPCl_b_ErCT8Ox7Zq_bO-XdMQSzZsTvO1-DV7ptPoRpzdIBfI0TELdybAaLxYBUE5SNTxNo8-U0TzCHQVJXxqoXyoLWYPXBYKdpmXLh39AVAEUNm0sJy-Lp_h8tzeC6T4ptkGFecivvHQ">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1 z-10 relative bg-surface-container">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-headline-md text-headline-md text-on-surface uppercase leading-tight line-clamp-2 pr-4 group-hover:text-primary-container transition-colors">Grit &amp; Grace Protective Set</h3>
+                            </div>
+                            <p class="font-body-md text-body-md text-on-surface-variant text-sm mb-4">Impact-resistant caps with memory foam core. Knees, elbows, wrists.</p>
+                            <div class="mt-auto pt-4 border-t-2 border-outline-variant/30 flex gap-2">
+                                <a class="flex-1 bg-transparent border-2 border-on-surface text-on-surface py-2 font-label-bold text-label-bold uppercase hover:bg-on-surface hover:text-surface transition-all group-hover:border-primary-container group-hover:bg-primary-container group-hover:text-on-primary-container shadow-[2px_2px_0px_0px_transparent] group-hover:shadow-[2px_2px_0px_0px_#000] text-center" href="https://wa.me/254703169974?text=I'm%20interested%20in%20negotiating%20for%20the%20Grit%20%26%20Grace%20Protective%20Set">Negotiate via WhatsApp</a>
+                                <button class="w-10 h-10 flex items-center justify-center border-2 border-outline-variant text-on-surface-variant hover:border-secondary-container hover:text-secondary-container transition-all bg-surface-container">
+                                    <span class="material-symbols-outlined text-lg">favorite</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Product 4 -->
+                    <article class="bg-surface-container flex flex-col group relative overflow-hidden transition-transform duration-300 hover:-translate-y-2 shadow-md hover:shadow-xl hover:shadow-primary-container/20">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-outline-variant z-20 group-hover:bg-primary-container transition-colors"></div>
+                        <div class="relative w-full aspect-square bg-surface-container-high overflow-hidden">
+                            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100" data-alt="Macro photography of four red polyurethane roller skate wheels arranged in a line. The wheels have a bright blue central hub. Sharp focus on the texture of the urethane. Stark dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhZ0k1z1gBpNTo1XKg6pWnnqpCPXK-Humo3qnX0gOCH2E3LsysKoU3SpL3rkvon8IURwZhweRtS1Tb0cwAoj6M0vPxBdDS-bXeapBXRRKVpum3pwXtCKM0jskrV9nMUth9NSgSwyiOAIuodbKVw-GCCtNNuytzQ0y5DfRuedTej_XD5rDpbQa4X6DZzSfo3EYhYaS5JJUQQBlr2BuRttg0-UPgVmzkj3CaI9DLvOw6ZZg3U_GU7rmi-g">
+                            <div class="absolute top-4 right-4 bg-surface-variant text-on-surface-variant px-3 py-1 font-label-bold text-label-bold uppercase border-2 border-outline-variant shadow-[2px_2px_0px_0px_#000] z-10">
+                                Bestseller
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-1 z-10 relative bg-surface-container">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-headline-md text-headline-md text-on-surface uppercase leading-tight line-clamp-2 pr-4 group-hover:text-primary-container transition-colors">Velocity Wheels (Set of 4)</h3>
+                            </div>
+                            <p class="font-body-md text-body-md text-on-surface-variant text-sm mb-4">80mm / 85A hardness. Bullet profile for speed and agility.</p>
+                            <div class="mt-auto pt-4 border-t-2 border-outline-variant/30 flex gap-2">
+                                <a class="flex-1 bg-transparent border-2 border-on-surface text-on-surface py-2 font-label-bold text-label-bold uppercase hover:bg-on-surface hover:text-surface transition-all group-hover:border-primary-container group-hover:bg-primary-container group-hover:text-on-primary-container shadow-[2px_2px_0px_0px_transparent] group-hover:shadow-[2px_2px_0px_0px_#000] text-center" href="https://wa.me/254703169974?text=I'm%20interested%20in%20negotiating%20for%20the%20Velocity%20Wheels">Negotiate via WhatsApp</a>
+                                <button class="w-10 h-10 flex items-center justify-center border-2 border-outline-variant text-on-surface-variant hover:border-secondary-container hover:text-secondary-container transition-all bg-surface-container">
+                                    <span class="material-symbols-outlined text-lg">favorite</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <!-- Merch Banner Section -->
+            <section class="w-full px-margin-desktop py-stack-lg z-10 my-stack-md">
+                <div class="relative w-full overflow-hidden bg-surface-container-high border-4 border-surface shadow-[8px_8px_0px_0px_#0257b4]">
+                    <div class="absolute inset-0 z-0 opacity-40">
+                        <div class="w-full h-full bg-cover bg-center" data-alt="Wide shot of a diverse group of skaters hanging out at night, illuminated by streetlights and neon signs. They are wearing Mercy Roll Nation apparel, laughing and looking cool. Dark, moody, energetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHM4JEmJ6L1LqSzFhm0XF8yGw9f_Ru3BMSnoHZbNykoPKUa1PCNjM0rwV1KNE_AiHlLlsoOvKthtlQNmD_wwe2Irctsu_lbI47tRaun-8Ndg0ZU4IjuzsqMXRbDl_XhlK1BvcTFpjOTvI5DD4ydOS1iCzHOgr7DBfmjFdXf5Ixybk4hwvl99X1LP56_FAeUHiNygEXHBBpPZH6GO5Iy8c-LNcUfRfGAQu7s1rzzf5OeFdvXe7iqs0KLw')">
+                    </div>
+                    <!-- Gradient Scrim for text readability -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent"></div>
+                    <div class="relative z-10 flex flex-col md:flex-row items-center justify-between p-stack-lg md:p-16 gap-stack-md">
+                        <div class="flex-1 max-w-2xl">
+                            <span class="font-label-bold text-label-bold text-secondary-container uppercase tracking-widest mb-2 block">Streetwear Collection</span>
+                            <h2 class="font-headline-xl text-headline-xl text-on-surface uppercase leading-none drop-shadow-[4px_4px_0px_#0257b4]">REP THE<br>NATION</h2>
+                            <p class="font-body-lg text-body-lg text-on-surface-variant mt-4 mb-8 max-w-md">Our latest drop of hoodies, tees, and caps. Built tough for the streets, styled for the session.</p>
+                            <button class="bg-secondary-container text-on-primary-container px-8 py-4 border-2 border-secondary-container font-label-bold text-label-bold uppercase hover:bg-transparent hover:text-secondary-container transition-all shadow-[4px_4px_0px_0px_#000]">
+                                View Collection
+                            </button>
+                        </div>
+                        <!-- Decorative graphic element -->
+                        <div class="hidden md:flex w-64 h-64 relative items-center justify-center">
+                            <!-- Animated rings -->
+                            <svg class="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite]" fill="none" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="48" stroke="#0257b4" stroke-dasharray="10 5" stroke-width="2"></circle>
+                                <circle cx="50" cy="50" r="40" stroke="#e61e2a" stroke-dasharray="4 4" stroke-width="1"></circle>
+                            </svg>
+                            <div class="bg-surface p-4 rounded-full border-4 border-secondary-container shadow-[0_0_20px_rgba(2,87,180,0.5)] z-10">
+                                <span class="material-symbols-outlined text-5xl text-primary-container">local_fire_department</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <script>
+            // Simple micro-interaction for add to cart buttons
+            document.querySelectorAll('button').forEach(btn => {
+                if (btn.textContent.trim().toLowerCase() === 'add to cart') {
+                    btn.addEventListener('click', function(e) {
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<span class="material-symbols-outlined text-sm align-middle mr-1">check</span> Added';
+                        this.classList.add('bg-primary-container', 'text-on-primary-container', 'border-primary-container');
+
+                        // Add a small shake animation class temporarily
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => this.style.transform = 'scale(1)', 150);
+
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.classList.remove('bg-primary-container', 'text-on-primary-container', 'border-primary-container');
+                        }, 2000);
+                    });
+                }
+            });
+        </script>
+    </main>
+
+    <footer class="w-full bg-surface-container-lowest border-t-2 border-outline-variant py-stack-lg">
+        <div class="w-full px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
+            <div class="flex flex-col gap-unit">
+                <span class="font-headline-md text-headline-md text-primary-container">MRN</span>
+                <p class="font-body-md text-body-md text-on-surface-variant">Grit, grace, and wheels. The urban skating movement starts here.</p>
+            </div>
+            <div class="flex flex-col gap-unit">
+                <span class="font-label-bold text-label-bold text-on-surface uppercase">Contact</span>
+                <p class="font-body-md text-body-md text-on-surface-variant">skate@mercyroll.com<br>Downtown District 08</p>
+            </div>
+            <div class="flex flex-col gap-unit items-end">
+                <div class="flex gap-4">
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer transition-colors">share</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer transition-colors">group</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer transition-colors">mail</span>
+                </div>
+                <p class="font-label-sm text-label-sm text-on-tertiary-fixed-variant mt-4">© 2024 MERCY ROLL NATION. NO LIMITS.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

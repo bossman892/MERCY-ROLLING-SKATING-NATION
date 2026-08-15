@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery | Mercy Roll Nation</title>
+  <!-- Google Font & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #e61e2a;
+      --surface: #131313;
+      --surface-bright: #393939;
+      --on-surface: #ffffff;
+      --on-surface-variant: #b0b0b0;
+      --font-heading: 'Oswald', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--surface);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* --- Navigation --- */
+    .navbar {
+      background: rgba(19, 19, 19, 0.95);
+      border-bottom: 2px solid var(--primary);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+    .logo-area { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .logo-img { width: 50px; height: 50px; object-fit: contain; }
+    .logo-text { font-family: var(--font-heading); text-transform: uppercase; line-height: 1; }
+    .logo-text .logo { font-size: 1.5rem; letter-spacing: 1px; }
+    .logo-text span { color: var(--primary); }
+    .nav-links { display: flex; list-style: none; gap: 30px; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--on-surface);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 1rem;
+      transition: color 0.3s;
+      padding: 8px 12px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+
+    /* --- Hero --- */
+    .gallery-hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), var(--surface));
+      border-bottom: 1px solid var(--surface-bright);
+    }
+    .gallery-hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 8vw, 4rem);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+    .gallery-hero h1 span { color: var(--primary); }
+    .gallery-hero p {
+      color: var(--on-surface-variant);
+      max-width: 600px;
+      margin: 10px auto 0;
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    }
+
+    /* --- Main Content --- */
+    .gallery-main { padding: 60px 0; }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      transition: transform 0.3s;
+    }
+    .back-link:hover { transform: translateX(-5px); }
+
+    /* Filter Tabs */
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .filter-tabs button {
+      padding: 12px 20px;
+      background: var(--surface-bright);
+      border: none;
+      color: var(--on-surface);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-radius: 4px;
+      min-height: 44px;
+      font-size: clamp(0.75rem, 1vw, 0.9rem);
+      white-space: nowrap;
+    }
+    .filter-tabs button:hover, .filter-tabs button.active {
+      background: var(--primary);
+      box-shadow: 0 4px 15px rgba(230, 30, 42, 0.4);
+    }
+    .filter-tabs button:active {
+      transform: scale(0.98);
+    }
+
+    /* Gallery Grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 45vw, 280px), 1fr));
+      gap: clamp(15px, 4vw, 20px);
+    }
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      border-radius: 8px;
+      cursor: pointer;
+      background: var(--surface-bright);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .gallery-item:hover img { transform: scale(1.1); }
+    .gallery-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover .overlay { opacity: 1; }
+    .gallery-item .title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      color: var(--on-surface);
+    }
+    .gallery-item .sub {
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .gallery-item .badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--primary);
+      color: white;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-radius: 2px;
+      z-index: 2;
+    }
+    .gallery-item .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      color: white;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* --- Lightbox --- */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.98);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(15px, 5vw, 40px);
+      overflow-y: auto;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox-content { position: relative; max-width: 90vw; max-height: 85vh; width: 100%; }
+    .lightbox-content img, .lightbox-content video {
+      max-width: 100%;
+      max-height: 70vh;
+      display: block;
+      box-shadow: 0 0 50px rgba(0,0,0,0.5);
+      height: auto;
+    }
+    .lightbox-image-hidden { display: none; }
+    .lightbox-video-hidden { display: none; }
+    .lightbox-close {
+      position: absolute;
+      top: clamp(5px, 3vw, 30px);
+      right: clamp(5px, 3vw, 30px);
+      background: none;
+      border: none;
+      color: white;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      cursor: pointer;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--surface-bright);
+      color: white;
+      border: none;
+      padding: clamp(10px, 2vw, 15px);
+      cursor: pointer;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      border-radius: 50%;
+      transition: background 0.3s;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-nav:hover { background: var(--primary); }
+    .lightbox-nav:active { transform: translateY(-50%) scale(0.95); }
+    .lightbox-nav.prev { left: clamp(-40px, -5vw, -70px); }
+    .lightbox-nav.next { right: clamp(-40px, -5vw, -70px); }
+    .lightbox-caption { text-align: center; margin-top: 20px; }
+    .lightbox-caption .title { font-family: var(--font-heading); font-size: 1.5rem; text-transform: uppercase; }
+    .lightbox-caption .sub { color: var(--on-surface-variant); font-size: 0.9rem; margin-top: 5px; }
+
+    /* --- Footer --- */
+    footer { background: #000; padding: 60px 0 30px; border-top: 1px solid var(--surface-bright); }
+    .footer-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+    .footer-col h4 { font-family: var(--font-heading); color: var(--primary); margin-bottom: 20px; text-transform: uppercase; font-size: 1.2rem; }
+    .footer-col p { color: var(--on-surface-variant); margin-bottom: 10px; font-size: 0.9rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { color: var(--on-surface-variant); text-decoration: none; transition: color 0.3s; font-size: 0.9rem; }
+    .footer-col ul li a:hover { color: var(--primary); }
+    .social-links { display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
+    .social-links a { color: var(--on-surface); font-size: 1.2rem; transition: color 0.3s; min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+    .social-links a:hover { color: var(--primary); }
+    .social-links a:active { transform: scale(0.95); }
+    .footer-bottom { border-top: 1px solid var(--surface-bright); margin-top: 40px; padding-top: 20px; text-align: center; }
+    .footer-bottom p { font-size: 0.8rem; color: var(--on-surface-variant); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .gallery-hero h1 { font-size: 2.5rem; }
+      .lightbox-nav { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo-area">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWmpI2bz9euRYeuNFh4bL9OJtAdO37grqRFVX9CoprLC9lur9V2wk4dir9NLJNW7Cu7LoPeobaRrDUqTGkeijysn6qOkUIWy9a4GwqRKuaPni2eGEN_nFYsnU3Lvb2_I1ePgH6D1B1vMpdQdATxEvXUh-TlwD6G5JDDlGEZa1IeQglAers2dEaagDsv1qDPbvBUZCV1b_uk_eOa2shkjuvheNPZU8oas5E0EaO25ieO_czKAlBrOIj4fIoczhLNHcncAw" alt="Mercy Roll Nation Logo" class="logo-img" />
+        <div class="logo-text">
+          <div class="logo">MERCY ROLL <span>NATION</span></div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="gallery-hero">
+    <div class="container">
+      <h1>The <span>Nation</span> in Motion</h1>
+      <p>A high-velocity look at urban skating culture, our community, and the skills we build every day.</p>
+    </div>
+  </section>
+
+  <main class="gallery-main">
+    <div class="container">
+      <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+      <div class="filter-tabs" id="filterTabs">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="photo">Photos</button>
+        <button data-filter="video">Videos</button>
+        <button data-filter="events">Events</button>
+        <button data-filter="training">Training</button>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </main>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose">&times;</button>
+      <button class="lightbox-nav prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+      <button class="lightbox-nav next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+      <div id="lightboxMedia">
+        <img src="" alt="" id="lightboxImage" class="lightbox-image-hidden" />
+        <video controls id="lightboxVideo" class="lightbox-video-hidden"></video>
+      </div>
+      <div class="lightbox-caption">
+        <div class="title" id="lbTitle"></div>
+        <div class="sub" id="lbSub"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h4>MRN</h4>
+        <p>Grit, grace, and wheels. The urban skating movement starts here.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Email: mercyrollnation@gmail.com</p>
+        <p>Phone: 0703169974</p>
+        <div class="social-links">
+          <a href="#" title="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Follow us on TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 MERCY ROLL NATION. NO LIMITS.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const GALLERY_ITEMS = [
+        { id: 1, type: 'photo', category: 'training', title: 'Urban Basics', description: 'Mastering balance in the concrete jungle.', src: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=1000', thumb: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=400&h=400&fit=crop' },
+        { id: 2, type: 'photo', category: 'events', title: 'Night Session', description: 'Rolling through the city lights.', src: 'https://images.unsplash.com/photo-1531169111683-71a810a0d0b1?w=1000', thumb: 'https://images.unsplash.com/photo-1531169111683-71a810a0d0b1?w=400&h=400&fit=crop' },
+        { id: 3, type: 'photo', category: 'training', title: 'Precision Flow', description: 'Advanced footwork and control.', src: 'https://images.unsplash.com/photo-1560986763-a7dd48c8ab6c?w=1000', thumb: 'https://images.unsplash.com/photo-1560986763-a7dd48c8ab6c?w=400&h=400&fit=crop' },
+        { id: 4, type: 'video', category: 'training', title: 'Speed Tutorial', description: 'Building explosive momentum.', src: 'https://www.w3schools.com/html/mov_bbb.mp4', thumb: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=400&fit=crop', poster: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400' },
+        { id: 5, type: 'photo', category: 'events', title: 'Nation Meetup', description: 'Community roll in the heart of Nairobi.', src: 'https://images.unsplash.com/photo-1574958269340-fa927503f3dd?w=1000', thumb: 'https://images.unsplash.com/photo-1574958269340-fa927503f3dd?w=400&h=400&fit=crop' },
+        { id: 6, type: 'photo', category: 'training', title: 'Grit & Grace', description: 'The focus behind the movement.', src: 'https://images.unsplash.com/photo-1531948933756-4a2a85a9c6ab?w=1000', thumb: 'https://images.unsplash.com/photo-1531948933756-4a2a85a9c6ab?w=400&h=400&fit=crop' }
+      ];
+
+      let currentFilter = 'all';
+      let currentIdx = -1;
+      let filteredItems = [];
+
+      function render() {
+        const grid = document.getElementById('galleryGrid');
+        filteredItems = currentFilter === 'all' ? GALLERY_ITEMS : GALLERY_ITEMS.filter(i => i.category === currentFilter || i.type === currentFilter);
+        
+        grid.innerHTML = filteredItems.map((item, idx) => `
+          <div class="gallery-item" onclick="openLB(${idx})">
+            <img src="${item.thumb}" alt="${item.title}">
+            ${item.type === 'video' ? '<i class="fas fa-play-circle play-icon"></i>' : ''}
+            <span class="badge">${item.type}</span>
+            <div class="overlay">
+              <div class="title">${item.title}</div>
+              <div class="sub">${item.category}</div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      window.openLB = (idx) => {
+        currentIdx = idx;
+        const item = filteredItems[idx];
+        const lb = document.getElementById('lightbox');
+        const img = document.getElementById('lightboxImage');
+        const video = document.getElementById('lightboxVideo');
+        
+        if(item.type === 'video') {
+          img.classList.add('lightbox-image-hidden');
+          video.classList.remove('lightbox-video-hidden');
+          video.src = item.src;
+          video.poster = item.poster;
+          video.play();
+        } else {
+          video.classList.add('lightbox-video-hidden');
+          video.pause();
+          img.classList.remove('lightbox-image-hidden');
+          img.src = item.src;
+        }
+
+        document.getElementById('lbTitle').textContent = item.title;
+        document.getElementById('lbSub').textContent = item.description;
+        lb.classList.add('active');
+        updateNav();
+      };
+
+      function updateNav() {
+        document.getElementById('lightboxPrev').style.display = currentIdx > 0 ? 'block' : 'none';
+        document.getElementById('lightboxNext').style.display = currentIdx < filteredItems.length - 1 ? 'block' : 'none';
+      }
+
+      document.getElementById('lightboxClose').onclick = () => {
+        document.getElementById('lightbox').classList.remove('active');
+        document.getElementById('lightboxVideo').pause();
+      };
+
+      document.getElementById('lightboxPrev').onclick = () => openLB(currentIdx - 1);
+      document.getElementById('lightboxNext').onclick = () => openLB(currentIdx + 1);
+
+      document.querySelectorAll('.filter-tabs button').forEach(btn => {
+        btn.onclick = function() {
+          document.querySelector('.filter-tabs button.active').classList.remove('active');
+          this.classList.add('active');
+          currentFilter = this.dataset.filter;
+          render();
+        };
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

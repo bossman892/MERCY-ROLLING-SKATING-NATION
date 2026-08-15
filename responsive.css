@@ -1,0 +1,640 @@
+/* responsive.css */
+
+/* ===== RESPONSIVE STYLES FOR MERCY ROLL NATION ===== */
+
+/* ===== UNIVERSAL RESPONSIVE & DEVICE SUPPORT ===== */
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets */
+    button, a, input[type="button"], input[type="submit"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Remove hover effects on touch devices */
+    button:hover, a:hover {
+        background-color: inherit;
+    }
+    
+    /* Add active states instead */
+    button:active, a:active {
+        opacity: 0.7;
+        transform: scale(0.98);
+    }
+    
+    /* Improve form interaction */
+    input, textarea, select {
+        min-height: 44px;
+        font-size: 16px;
+    }
+}
+
+/* High DPI / Retina Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Slightly reduce motion for better performance */
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Landscape Orientation Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    header .h-20 { height: 50px; }
+    .min-h-\[100vh\] { min-height: 100vh; }
+    .py-16 { padding-top: 20px; padding-bottom: 20px; }
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    /* Already dark by default */
+}
+
+/* Light Mode Support */
+@media (prefers-color-scheme: light) {
+    body { background-color: #f5f5f5; color: #333; }
+}
+
+/* --- Extra Small Devices (Mobile) --- */
+@media (max-width: 480px) {
+    /* Header */
+    header .h-20 {
+        height: 64px;
+    }
+    
+    header .px-margin-mobile {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    
+    header .gap-2 {
+        gap: 8px;
+    }
+    
+    header .text-base {
+        font-size: 14px;
+    }
+    
+    /* Hero Section */
+    .min-h-\[100vh\] {
+        min-height: 90vh;
+    }
+    
+    .text-3xl {
+        font-size: 28px;
+    }
+    
+    .leading-\[1\.1\] {
+        line-height: 1.2;
+    }
+    
+    .gap-6 {
+        gap: 16px;
+    }
+    
+    .pt-24 {
+        padding-top: 80px;
+    }
+    
+    .w-12 {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .h-12 {
+        height: 40px;
+    }
+    
+    .text-2xl {
+        font-size: 20px;
+    }
+    
+    /* Mission Section */
+    .py-16 {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+    
+    .p-8 {
+        padding: 20px;
+    }
+    
+    .text-4xl {
+        font-size: 28px;
+    }
+    
+    .gap-8 {
+        gap: 20px;
+    }
+    
+    /* Services Section */
+    .p-6 {
+        padding: 16px;
+    }
+    
+    .text-5xl {
+        font-size: 36px;
+    }
+    
+    .gap-gutter {
+        gap: 16px;
+    }
+    
+    /* Booking Form */
+    .p-6 {
+        padding: 16px;
+    }
+    
+    .text-2xl {
+        font-size: 20px;
+    }
+    
+    .py-3 {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .min-h-\[48px\] {
+        min-height: 40px;
+    }
+    
+    /* CTA Section */
+    .mb-6 {
+        margin-bottom: 16px;
+    }
+    
+    .mb-10 {
+        margin-bottom: 24px;
+    }
+    
+    .gap-6 {
+        gap: 12px;
+    }
+    
+    .w-12 {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .h-12 {
+        height: 44px;
+    }
+    
+    /* Footer */
+    .py-12 {
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+    
+    .gap-8 {
+        gap: 24px;
+    }
+    
+    .text-2xl {
+        font-size: 20px;
+    }
+    
+    /* Mobile Menu */
+    .text-2xl {
+        font-size: 20px;
+    }
+    
+    .gap-6 {
+        gap: 16px;
+    }
+    
+    .pt-8 {
+        padding-top: 24px;
+    }
+    
+    .pb-8 {
+        padding-bottom: 24px;
+    }
+}
+
+/* --- Small Devices (Phones) --- */
+@media (min-width: 481px) and (max-width: 640px) {
+    /* Header */
+    header .h-20 {
+        height: 68px;
+    }
+    
+    header .px-margin-mobile {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    .text-base {
+        font-size: 15px;
+    }
+    
+    /* Hero Section */
+    .text-3xl {
+        font-size: 30px;
+    }
+    
+    .pt-24 {
+        padding-top: 88px;
+    }
+    
+    .w-12 {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .h-12 {
+        height: 44px;
+    }
+    
+    /* Mission Section */
+    .text-4xl {
+        font-size: 32px;
+    }
+    
+    .p-8 {
+        padding: 24px;
+    }
+    
+    /* Services Section */
+    .p-6 {
+        padding: 20px;
+    }
+}
+
+/* --- Medium Devices (Tablets) --- */
+@media (min-width: 641px) and (max-width: 768px) {
+    /* Header */
+    header .px-margin-mobile {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+    
+    /* Hero Section */
+    .text-3xl {
+        font-size: 32px;
+    }
+    
+    .pt-24 {
+        padding-top: 96px;
+    }
+    
+    /* Mission Section */
+    .text-4xl {
+        font-size: 34px;
+    }
+    
+    .p-8 {
+        padding: 28px;
+    }
+    
+    /* Services Section */
+    .grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .p-6 {
+        padding: 20px;
+    }
+}
+
+/* --- Large Devices (Desktops) --- */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Header */
+    header .px-margin-desktop {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+    
+    /* Hero Section */
+    .text-3xl {
+        font-size: 36px;
+    }
+    
+    /* Mission Section */
+    .md\:mt-24 {
+        margin-top: 60px;
+    }
+    
+    .p-8 {
+        padding: 32px;
+    }
+    
+    /* Services Section */
+    .grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* --- Extra Large Devices --- */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    /* Hero Section */
+    .text-3xl {
+        font-size: 40px;
+    }
+}
+
+/* --- Fix for Tablet and Mobile Menu --- */
+@media (max-width: 768px) {
+    /* Hide desktop nav */
+    .hidden.md\:flex {
+        display: none !important;
+    }
+    
+    /* Show mobile menu button */
+    .md\:hidden {
+        display: flex !important;
+    }
+    
+    /* Adjust logo size */
+    .h-10 {
+        height: 40px;
+        width: 40px;
+    }
+    
+    .w-10 {
+        width: 40px;
+    }
+    
+    /* Stack grid items on mobile */
+    .grid-cols-1 {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Reduce shadow sizes on mobile */
+    .shadow-\[4px_4px_0px_0px_\#e61e2a\] {
+        box-shadow: 2px 2px 0px 0px #e61e2a;
+    }
+    
+    .shadow-\[8px_8px_0px_0px_\#0257b4\] {
+        box-shadow: 4px 4px 0px 0px #0257b4;
+    }
+    
+    /* Adjust aspect ratio on mobile */
+    .aspect-video {
+        aspect-ratio: 16/9;
+    }
+}
+
+/* --- Print Styles --- */
+@media print {
+    header,
+    footer,
+    #mobileMenu,
+    #mobileMenuBtn {
+        display: none !important;
+    }
+    
+    main {
+        padding-top: 0 !important;
+    }
+    
+    body {
+        background: #fff !important;
+        color: #000 !important;
+    }
+    
+    .bg-surface,
+    .bg-surface-container,
+    .bg-surface-container-lowest {
+        background: #fff !important;
+    }
+    
+    .text-on-surface,
+    .text-on-surface-variant,
+    .text-on-primary-container {
+        color: #000 !important;
+    }
+}
+
+/* --- Landscape Orientation Fixes --- */
+@media (max-height: 600px) and (orientation: landscape) {
+    .min-h-\[100vh\] {
+        min-height: 80vh;
+    }
+    
+    .pt-24 {
+        padding-top: 60px;
+    }
+    
+    .mb-2 {
+        margin-bottom: 8px;
+    }
+    
+    .gap-6 {
+        gap: 12px;
+    }
+    
+    .text-3xl {
+        font-size: 24px;
+    }
+}
+
+/* --- Reduced Motion Preferences --- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .group-hover\:scale-\[1\.02\] {
+        transform: none !important;
+    }
+    
+    .group-hover\:translate-x-2 {
+        transform: none !important;
+    }
+    
+    .group-hover\:translate-y-2 {
+        transform: none !important;
+    }
+}
+
+/* --- High Contrast Mode --- */
+@media (prefers-contrast: high) {
+    .bg-surface-container {
+        background-color: #1a1a1a;
+    }
+    
+    .text-on-surface-variant {
+        color: #ffffff;
+    }
+    
+    .border-primary-container {
+        border-color: #ff0000;
+    }
+    
+    .shadow-\[4px_4px_0px_0px_\#e61e2a\] {
+        box-shadow: 4px 4px 0px 0px #ff0000;
+    }
+}
+
+/* --- Dark Mode Adjustments --- */
+@media (prefers-color-scheme: dark) {
+    .bg-background {
+        background-color: #131313;
+    }
+    
+    .text-on-surface {
+        color: #e5e2e1;
+    }
+}
+
+/* --- Tablet Portrait Specific --- */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+    .md\:text-headline-xl {
+        font-size: 48px;
+    }
+    
+    .md\:text-headline-lg {
+        font-size: 36px;
+    }
+    
+    .md\:text-body-lg {
+        font-size: 16px;
+    }
+    
+    .md\:p-12 {
+        padding: 32px;
+    }
+    
+    .md\:px-margin-desktop {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+/* --- Fix for very small screens --- */
+@media (max-width: 360px) {
+    .text-3xl {
+        font-size: 22px;
+    }
+    
+    .text-4xl {
+        font-size: 24px;
+    }
+    
+    .text-2xl {
+        font-size: 18px;
+    }
+    
+    .w-12 {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .h-12 {
+        height: 36px;
+    }
+    
+    .gap-4 {
+        gap: 8px;
+    }
+    
+    .px-4 {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}
+
+/* --- Smooth Scrolling for Mobile --- */
+@media (max-width: 768px) {
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Improve touch targets */
+    button,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* --- Fix for iOS Safari --- */
+@supports (-webkit-touch-callout: none) {
+    html {
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+    }
+}
+
+/* --- Large Desktop Screens (1920px+) --- */
+@media (min-width: 1920px) {
+    body {
+        font-size: 18px;
+    }
+    
+    .text-2xl {
+        font-size: 32px;
+    }
+    
+    .text-3xl {
+        font-size: 48px;
+    }
+    
+    .text-4xl {
+        font-size: 56px;
+    }
+}
+
+/* --- Print Styles for Device Compatibility --- */
+@media print {
+    body {
+        background: white;
+        color: #000;
+    }
+    
+    header, nav, .mobile-menu {
+        display: none !important;
+    }
+    
+    main {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    button, a[href*="javascript"] {
+        display: none;
+    }
+}
+
+/* --- Foldable Device Support --- */
+@media (screen-spanning: single-fold-vertical) {
+    body {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    main {
+        flex: 1;
+        margin-left: env(viewport-segment-width 0 0);
+    }
+}
+
+@media (screen-spanning: single-fold-horizontal) {
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    main {
+        flex: 1;
+        margin-top: env(viewport-segment-height 0 0);
+    }
+}

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+    <meta name="theme-color" content="#e61e2a"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <style>
+        @layer base {
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                scroll-behavior: smooth;
+            }
+            body {
+                overscroll-behavior: none;
+            }
+            main> :first-child {
+                margin-top: 0 !important;
+            }
+            main> :last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+    </script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#e61e2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-container": "#fefefe",
+                        "on-secondary-fixed-variant": "#004491",
+                        "surface-container-high": "#2a2a2a",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary": "#680009",
+                        "on-surface-variant": "#e7bdb9",
+                        "on-tertiary": "#2f3131",
+                        "surface-container-highest": "#353534",
+                        "primary-fixed-dim": "#ffb3ad",
+                        "surface": "#131313",
+                        "secondary": "#acc7ff",
+                        "secondary-fixed-dim": "#acc7ff",
+                        "on-surface": "#e5e2e1",
+                        "primary": "#ffb3ad",
+                        "on-error": "#690005",
+                        "background": "#131313",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-secondary-container": "#bcd1ff",
+                        "outline": "#ae8884",
+                        "on-primary-fixed-variant": "#930011",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-fixed": "#001a40",
+                        "on-primary-container": "#fffeff",
+                        "on-secondary": "#002f67",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#747676",
+                        "inverse-primary": "#c0001a",
+                        "tertiary": "#c6c6c7",
+                        "error-container": "#93000a",
+                        "surface-variant": "#353534",
+                        "surface-dim": "#131313",
+                        "secondary-container": "#0257b4",
+                        "outline-variant": "#5d3f3c",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-tint": "#ffb3ad",
+                        "on-primary-fixed": "#410003",
+                        "inverse-on-surface": "#313030",
+                        "surface-bright": "#393939",
+                        "surface-container": "#201f1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "24px",
+                        "stack-lg": "48px",
+                        "margin-desktop": "40px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-bold": ["Montserrat"],
+                        "label-sm": ["Montserrat"],
+                        "headline-md": ["Oswald"],
+                        "body-lg": ["Montserrat"],
+                        "body-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Oswald"],
+                        "headline-xl": ["Oswald"],
+                        "headline-lg": ["Oswald"]
+                    },
+                    "fontSize": {
+                        "label-bold": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-xl": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&amp;family=Oswald:wght@100..900&amp;display=swap" rel="stylesheet"/>
+</head>
+
+<body class="bg-background font-body-md text-on-surface bg-center" style='background-image: linear-gradient(rgba(19, 19, 19, 0.92), rgba(19, 19, 19, 0.92)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBi8X3hvOIfzB4eGTO6D5lqtuTXghU8HlO_AisBz-vl---eZCWg9M6xgYU-KeLqicx-3riJbbwN6kIksrY_hDeQNvZOC9ja_Tmlj8dscODOCoV2tDBEMYhTthFALcHV135CkDecY0URofpbNru6jVFQhExDotyKiTCEQo4TkY6GKT4lw81IQ0T00qW7pfcr_-URVh-pqAwDwXvsJwRVu9CI_2Y1iLERoH0v-lg6bqphZuKJOvzSOhRxGmMp_eB0z0C9x6U"); background-size: cover; background-position: center center; background-attachment: fixed; background-repeat: no-repeat;'>
+
+    <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b-2 border-primary-container">
+        <div class="h-20 w-full px-margin-mobile md:px-margin-desktop flex items-center justify-between">
+            <div class="flex items-center gap-2 md:gap-4">
+                <div class="h-10 w-10 md:h-12 md:w-12 flex items-center justify-center bg-primary-container p-1 rounded-full overflow-hidden shadow-[2px_2px_0px_0px_#0257b4] md:shadow-[4px_4px_0px_0px_#0257b4]">
+                    <img alt="Mercy Roll Nation" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTeGK4YRO5SQCwUC84vb5JP8g9y058kXznIVtHmkK9kbHBBbtteyVmfvATIsrRRr39uN8jpc3n_jFMITPGYwUnOqK94hfrEw87wtUsSuzu1e4sV0LFZwUsVqzKMtDTYyFll0J5f4fk7RFL8sjJFzx-jM86Jkp1kbqpKBnC9Rtw78WKwg2rIFJgga00HD0bQO5wT7MVi-YkDJlDSHb9dTiK1l9uhzAzPzvz1CSsc9xnrEv1l34YVmJxRam-4L_wfeY0sH0"/>
+                </div>
+                <span class="font-headline-md md:text-headline-md uppercase tracking-wider text-on-surface text-base">Mercy Roll <span class="text-primary-container">Nation</span></span>
+            </div>
+            <nav class="hidden md:flex items-center gap-stack-lg" data-active-classes="text-primary-container font-label-bold">
+                <a aria-current="page" class="nav-link uppercase transition-all text-primary-container font-label-bold" data-path="home" href="index.html">Home</a>
+                <a class="nav-link font-label-bold text-label-bold uppercase transition-all text-on-surface-variant hover:text-primary" data-path="about" href="about.html">About Us</a>
+                <a class="nav-link font-label-bold text-label-bold uppercase transition-all text-on-surface-variant hover:text-primary" data-path="gallery" href="gallery.html">Gallery</a>
+                <a class="nav-link font-label-bold text-label-bold uppercase transition-all text-on-surface-variant hover:text-primary" data-path="shop" href="shop.html">Shop</a>
+                <a class="nav-link font-label-bold text-label-bold uppercase transition-all text-on-surface-variant hover:text-primary" data-path="contact" href="contact.html">Contact</a>
+            </nav>
+            <div class="flex items-center gap-4 md:gap-6">
+                <span class="material-symbols-outlined text-on-surface cursor-pointer hover:text-primary-container transition-colors">search</span>
+                <div class="relative cursor-pointer group">
+                    <span class="material-symbols-outlined text-on-surface group-hover:text-primary-container transition-colors">shopping_cart</span>
+                    <span class="absolute -top-2 -right-2 bg-primary-container text-on-primary-container text-xs w-4 h-4 flex items-center justify-center rounded-full font-label-bold">0</span>
+                </div>
+                <img alt="Profile" class="hidden sm:block w-8 h-8 rounded-full object-cover border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG2UVtOZNsjm-fHLFLbZpesNILY-Joge458nvrsaoYPkvDTNgSqlj9JIfGDRJ6lo-1wogjSt0oeFl0KoLRxLcEYR6TSJ6h0gjDlgPs6W1Jm1t81ioHKDZOOtLpuABdLZ7XsE_m-EgD36Ig0UcPdJHhWGh7LUIWS28XKvG7-gjsraBJ6qlej2r_rUE6vpzAslT_VejciER1vn_P0DRK_JCGcn8bYhxj1VWFHjgCoJxrduVRZlRqlW5gh2pCPwxBZO3Gz1g"/>
+                <button class="md:hidden flex items-center text-on-surface hover:text-primary-container transition-colors" id="mobileMenuBtn">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu Overlay -->
+        <div class="hidden fixed inset-0 top-20 bg-surface/95 backdrop-blur-lg z-40 flex-col items-center pt-8 gap-6 border-t border-primary-container/30 overflow-y-auto pb-8" id="mobileMenu">
+            <a aria-current="page" class="mobile-nav-link uppercase transition-all text-primary-container font-headline-md text-2xl tracking-wider text-base" href="index.html">Home</a>
+            <a class="mobile-nav-link uppercase transition-all text-on-surface hover:text-primary font-headline-md text-2xl tracking-wider text-base" href="about.html">About Us</a>
+            <a class="mobile-nav-link uppercase transition-all text-on-surface hover:text-primary font-headline-md text-2xl tracking-wider text-base" href="gallery.html">Gallery</a>
+            <a class="mobile-nav-link uppercase transition-all text-on-surface hover:text-primary font-headline-md text-2xl tracking-wider text-base" href="shop.html">Shop</a>
+            <a class="mobile-nav-link uppercase transition-all text-on-surface hover:text-primary font-headline-md text-2xl tracking-wider text-base" href="contact.html">Contact</a>
+        </div>
+    </header>
+
+    <main class="w-full pt-20">
+        <div class="flex flex-col w-full">
+            <!-- Hero Section -->
+            <section class="animate-on-scroll relative w-full min-h-[100vh] -mt-20 flex flex-col justify-center items-start px-margin-mobile md:px-margin-desktop overflow-hidden is-visible">
+                <!-- Sophisticated gradient overlays -->
+                <div class="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-surface/90 md:from-surface md:via-surface/95 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 md:via-transparent to-surface/40"></div>
+                <!-- Decorative typographic texture -->
+                <div class="absolute right-margin-desktop top-1/2 -translate-y-1/2 opacity-20 pointer-events-none hidden lg:block">
+                    <span class="font-headline-xl text-headline-xl text-surface-container-lowest [writing-mode:vertical-rl] tracking-tighter uppercase">
+                        Est. 2024
+                    </span>
+                </div>
+                <div class="relative z-10 w-full max-w-container-max mx-auto pt-24 md:pt-20 flex flex-col justify-center gap-6 md:gap-8 text-center md:text-left items-center md:items-start">
+                    <div class="flex items-center gap-3 md:gap-4 mb-2 md:mb-4">
+                        <span class="w-8 md:w-12 h-1 md:h-2 bg-primary-container"></span>
+                        <span class="font-label-bold text-xs md:text-label-bold text-primary-container uppercase tracking-[0.15em] md:tracking-[0.2em]">Mercy Roll Nation</span>
+                        <span class="w-8 h-1 bg-primary-container md:hidden"></span>
+                    </div>
+                    <h1 class="md:text-headline-xl font-headline-xl text-on-surface uppercase leading-[1.1] md:leading-[0.9] flex flex-col relative drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] text-3xl">
+                        <span class="block relative group cursor-default">
+                            <span class="relative z-10 group-hover:text-primary transition-colors duration-500">Rolling</span>
+                            <span class="absolute inset-0 translate-x-1 translate-y-1 text-primary-container -z-10 blur-[1px]">Rolling</span>
+                        </span>
+                        <span class="block ml-0 md:ml-12 relative">
+                            Skills,
+                        </span>
+                        <span class="block text-surface-container-highest mix-blend-color-dodge text-stroke-primary">
+                            Building
+                        </span>
+                        <span class="block text-secondary md:ml-24">
+                            Confidence
+                        </span>
+                    </h1>
+                    <div class="mt-6 md:mt-8 flex gap-6 items-center">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-surface-container-lowest rounded-full flex items-center justify-center animate-spin-slow border-2 border-secondary-container">
+                            <span class="material-symbols-outlined text-primary-container">sync</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mission Section -->
+            <section class="animate-on-scroll w-full bg-surface py-16 md:py-stack-lg px-margin-mobile md:px-margin-desktop relative overflow-hidden is-visible">
+                <!-- Abstract speed lines -->
+                <div class="absolute inset-0 pointer-events-none opacity-5">
+                    <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                        <line class="text-primary-container" stroke="currentColor" stroke-width="2" x1="-100" x2="100%" y1="0" y2="100%"></line>
+                        <line class="text-secondary" stroke="currentColor" stroke-width="1" x1="-50" x2="100%" y1="0" y2="100%"></line>
+                    </svg>
+                </div>
+                <div class="w-full max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-gutter relative">
+                    <div class="col-span-1 md:col-span-6 relative z-20 md:mt-24 p-8 md:p-12 bg-surface-container shadow-[4px_4px_0px_0px_#e61e2a] md:shadow-[8px_8px_0px_0px_#e61e2a] text-center md:text-left">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-primary-container/20 flex items-center justify-center mb-6 md:mb-8 rounded-full mx-auto md:ml-0">
+                            <span class="material-symbols-outlined text-primary-container text-2xl md:text-3xl">local_fire_department</span>
+                        </div>
+                        <h2 class="text-4xl md:text-headline-lg font-headline-lg text-on-surface uppercase mb-4 md:mb-6 leading-none">Our Mission</h2>
+                        <p class="text-base md:text-body-lg font-body-lg text-on-surface-variant">
+                            Mercy Roll Nation is more than a team. It's an unstoppable force. We are dedicated to roller skating excellence, bringing the raw energy of urban culture to every session. We build champions on and off the wheels. Grit, grace, and unapologetic momentum.
+                        </p>
+                    </div>
+                    <div class="col-span-1 md:col-span-7 md:col-start-6 relative z-10 md:-mt-12 group mt-4 md:mt-0">
+                        <div class="w-full aspect-video md:aspect-[4/3] bg-cover bg-center shadow-xl group-hover:scale-[1.02] transition-transform duration-700 ease-out" data-alt="Dynamic action shot of a diverse group of roller skaters carving aggressively through an urban intersection." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCLZhg2nQBVRgJqTwfl2p5A7JhTyqXbsdpHcloBfPlyKnEarOPPgcCEhw-FrdNDc6rLAWvUbJ9H0EeM41SbARmnf2KiWUEmDMyNPzezZQZOMrXLgF8M1R0_MAe_gfkSBl3GZRQZgKXF8WTjlxsgSWgcxMO_ACpJlcIcnuaylyx8OMVY7yKkoVg9Xrz2BDnEQG6G4vUsSBZlvZv-9u1okg2jw28D9AP30-XDDCFUhuHfdv5BUuQlVrXARQ')">
+                        </div>
+                        <div class="absolute top-2 left-2 md:top-4 md:left-4 w-full h-full bg-secondary-container -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-700"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services & Booking Section -->
+            <section class="animate-on-scroll w-full bg-surface py-16 md:py-stack-lg px-margin-mobile md:px-margin-desktop relative overflow-hidden border-t border-outline-variant/20 is-visible">
+                <div class="w-full max-w-container-max mx-auto flex flex-col md:flex-row items-center gap-12">
+                    <div class="w-full md:w-1/2 flex flex-col gap-6">
+                        <div class="flex flex-col gap-2">
+                            <span class="font-label-bold text-primary-container uppercase tracking-widest">Our Story</span>
+                            <h2 class="text-4xl md:text-headline-lg font-headline-lg text-on-surface uppercase leading-none">Skate Today, <br/><span class="text-primary-container">Confident Tomorrow!</span></h2>
+                        </div>
+                        <p class="text-base md:text-body-lg font-body-lg text-on-surface-variant">
+                            Rolling Skills, Building Confidence. Join the Roll Nation Family! We teach more than skating. We build skills, confidence, discipline and life-long memories. Our mission is to empower skaters of all ages through urban culture and athletic excellence.
+                        </p>
+                        <a class="w-max bg-primary-container text-on-primary-container px-8 py-4 font-label-bold text-label-bold uppercase hover:bg-on-primary-container hover:text-primary-container border-2 border-transparent hover:border-primary-container transition-all shadow-[4px_4px_0px_0px_#0257b4]" href="about.html">Learn More</a>
+                    </div>
+                    <div class="w-full md:w-1/2 relative">
+                        <div class="aspect-video bg-surface-container border-l-4 border-primary-container shadow-[8px_8px_0px_0px_#0257b4] overflow-hidden">
+                            <img alt="Mercy Roll Nation Culture" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiuERFMB3JaNdHqKIp4hHR-Jl_IdePdkgWABLOSJNeSm01K9o0R0GzRNLt5VmnxBovozERSorSAYCn58Y4jQvSOFmjqRFp6j9BTCZ2fHC884mvO28RdkwVXkmvG5LuVHAEzG-tR3pAj9E5b6a-jmV-Fn25ynO7U3mYfJGIkJ4F9L-zAqbzRYEOgoqxEhFK1pXmfqN4j1P5-BEr1jTHy5pG5fWhNyJWP2j6DbG-gyRLveDou_lzSslTrURQTrDjKv1LN80"/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="animate-on-scroll w-full bg-surface-container-lowest py-16 md:py-stack-lg px-margin-mobile md:px-margin-desktop relative border-y border-outline-variant/30 is-visible" id="services">
+                <div class="w-full max-w-container-max mx-auto">
+                    <div class="text-center mb-10 md:mb-16 md:text-left">
+                        <h2 class="text-4xl md:text-headline-lg font-headline-lg text-on-surface uppercase mb-3 md:mb-4">Our <span class="text-secondary-container">Programs</span></h2>
+                        <p class="text-base md:text-body-lg text-on-surface-variant max-w-2xl mx-auto px-4 md:px-0">Master the streets with our specialized training programs designed for all skill levels.</p>
+                    </div>
+                    <!-- Booking Form -->
+                    <div class="max-w-3xl mx-auto bg-surface-container p-6 md:p-10 border border-outline-variant/20 shadow-[4px_4px_0px_0px_#0257b4] md:shadow-[8px_8px_0px_0px_#0257b4]" id="booking">
+                        <h3 class="text-2xl md:text-headline-md font-headline-md uppercase text-center text-on-surface mb-6 md:mb-8">Book a Session</h3>
+                        <form class="flex flex-col gap-5 md:gap-6" id="bookingForm">
+                            <div class="grid grid-cols-1 gap-5 md:gap-6">
+                                <div class="flex flex-col gap-2">
+                                    <label class="font-label-bold text-on-surface-variant text-xs md:text-sm uppercase">Full Name</label>
+                                    <input class="bg-surface border-b-2 border-outline-variant px-4 py-3 md:py-4 text-base md:text-sm text-on-surface focus:outline-none focus:border-primary-container transition-colors min-h-[48px] w-full" id="bookingFullName" placeholder="Enter your name" required="" type="text"/>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mt-2">
+                                <div class="flex flex-col gap-2">
+                                    <label class="font-label-bold text-on-surface-variant text-xs md:text-sm uppercase">Program</label>
+                                    <select class="bg-surface border-b-2 border-outline-variant px-4 py-3 md:py-4 text-base md:text-sm text-on-surface focus:outline-none focus:border-primary-container transition-colors appearance-none min-h-[48px] w-full" id="bookingProgram">
+                                        <option>School Roller Skating Programs</option>
+                                        <option>Private Coaching Sessions</option>
+                                        <option>Group Skating Sessions</option>
+                                        <option>Beginner &amp; Advanced Training</option>
+                                        <option>Holiday Skating Camps</option>
+                                        <option>Events &amp; Demonstrations</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="font-label-bold text-on-surface-variant text-xs md:text-sm uppercase">Date</label>
+                                    <input class="bg-surface border-b-2 border-outline-variant px-4 py-3 md:py-4 text-base md:text-sm text-on-surface focus:outline-none focus:border-primary-container transition-colors min-h-[48px] w-full" id="bookingDate" required="" type="date"/>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="font-label-bold text-on-surface-variant text-xs md:text-sm uppercase">Time</label>
+                                    <select class="bg-surface border-b-2 border-outline-variant px-4 py-3 md:py-4 text-base md:text-sm text-on-surface focus:outline-none focus:border-primary-container transition-colors appearance-none min-h-[48px] w-full" id="bookingTime" required="">
+                                        <option disabled="" selected="" value="">Select Time</option>
+                                        <option value="08:00 AM">08:00 AM</option>
+                                        <option value="09:00 AM">09:00 AM</option>
+                                        <option value="10:00 AM">10:00 AM</option>
+                                        <option value="11:00 AM">11:00 AM</option>
+                                        <option value="12:00 PM">12:00 PM</option>
+                                        <option value="01:00 PM">01:00 PM</option>
+                                        <option value="02:00 PM">02:00 PM</option>
+                                        <option value="03:00 PM">03:00 PM</option>
+                                        <option value="04:00 PM">04:00 PM</option>
+                                        <option value="05:00 PM">05:00 PM</option>
+                                        <option value="06:00 PM">06:00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="w-full bg-primary-container text-on-primary-container font-label-bold text-sm md:text-label-bold py-4 min-h-[56px] uppercase mt-2 md:mt-4 hover:bg-on-primary-container hover:text-primary-container border-2 border-transparent hover:border-primary-container transition-all" type="submit">Secure Your Spot</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final CTA Section -->
+            <section class="animate-on-scroll w-full bg-surface py-16 md:py-stack-lg px-margin-mobile md:px-margin-desktop overflow-hidden relative is-visible">
+                <!-- Glowing background accent -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-primary-container/10 blur-[60px] md:blur-[100px] rounded-full pointer-events-none"></div>
+                <div class="w-full max-w-container-max mx-auto flex flex-col items-center text-center relative z-10">
+                    <h2 class="text-4xl md:text-headline-xl font-headline-xl text-on-surface uppercase mb-6 md:mb-8 max-w-4xl tracking-tighter">
+                        Become Part of the <span class="text-primary-container">Nation</span>
+                    </h2>
+                    <p class="text-base md:text-body-lg font-body-lg text-on-surface-variant max-w-xl mb-10 md:mb-12 px-4 md:px-0">
+                        Ready to roll? Connect with us on social media and be part of the most electric skate community in the city. The streets are waiting.
+                    </p>
+                    <div class="py-8 md:py-12 flex justify-center w-full text-center">
+                        <span class="font-headline-md text-headline-md text-on-surface uppercase tracking-widest">FOLLOW US</span>
+                    </div>
+                    <div class="-mt-4 md:-mt-8 mb-8 md:mb-12 text-center flex flex-col items-center gap-2 px-4">
+                        <span class="font-label-bold text-primary-container">@mercyrollnation</span>
+                        <p class="font-headline-md text-on-surface-variant uppercase tracking-wider text-sm md:text-base">Rolling into a better future, one skate at a time!</p>
+                    </div>
+                    <div class="flex justify-center gap-6 mt-4 md:mt-6">
+                        <a class="w-12 h-12 flex items-center justify-center rounded-full border-2 border-primary-container text-primary-container hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 shadow-[2px_2px_0px_0px_#0257b4]" href="#">
+                            <span class="material-symbols-outlined">facebook</span>
+                        </a>
+                        <a class="w-12 h-12 flex items-center justify-center rounded-full border-2 border-primary-container text-primary-container hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 shadow-[2px_2px_0px_0px_#0257b4]" href="#">
+                            <span class="material-symbols-outlined">photo_camera</span>
+                        </a>
+                        <a class="w-12 h-12 flex items-center justify-center rounded-full border-2 border-primary-container text-primary-container hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 shadow-[2px_2px_0px_0px_#0257b4]" href="#">
+                            <span class="material-symbols-outlined">play_circle</span>
+                        </a>
+                    </div>
+                    <div class="mt-16 md:mt-24 w-full h-[2px] bg-gradient-to-r from-transparent via-surface-container-highest to-transparent"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="w-full bg-surface-container-lowest border-t-2 border-outline-variant py-12 md:py-stack-lg">
+        <div class="w-full px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-stack-lg text-center md:text-left">
+            <div class="flex flex-col gap-unit items-center md:items-start">
+                <span class="font-headline-md text-headline-md text-primary-container">MRN</span>
+                <p class="font-body-md text-body-md text-on-surface-variant">Grit, grace, and wheels. The urban skating movement starts here.</p>
+            </div>
+            <div class="flex flex-col gap-unit items-center md:items-start">
+                <span class="font-label-bold text-label-bold text-on-surface uppercase">Contact</span>
+                <p class="font-body-md text-body-md text-on-surface-variant">Email: mercyrollnation@gmail.com<br class=""/>Phone: 0703169974</p>
+            </div>
+            <div class="flex flex-col gap-unit items-center md:items-end">
+                <div class="flex gap-4">
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer transition-colors text-2xl">share</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer transition-colors text-2xl">group</span>
+                    <span class="material-symbols-outlined text-on-surface-variant hover:text-primary-container cursor-pointer transition-colors text-2xl">mail</span>
+                </div>
+                <p class="font-label-sm text-label-sm text-on-tertiary-fixed-variant mt-2 md:mt-4">© 2024 MERCY ROLL NATION. NO LIMITS.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Mobile Menu Toggle Logic
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                    mobileMenuBtn.innerHTML = '<span class="material-symbols-outlined text-3xl">close</span>';
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                    mobileMenuBtn.innerHTML = '<span class="material-symbols-outlined text-3xl">menu</span>';
+                    document.body.style.overflow = '';
+                }
+            }
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (isMenuOpen) toggleMenu();
+                    });
+                });
+            }
+
+            // 2. Booking Form Submission - Direct WhatsApp Redirect
+            const bookingForm = document.getElementById('bookingForm');
+            if (bookingForm) {
+                bookingForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const fullName = document.getElementById('bookingFullName').value.trim();
+                    const program = document.getElementById('bookingProgram').value;
+                    const date = document.getElementById('bookingDate').value;
+                    const time = document.getElementById('bookingTime') ? document.getElementById('bookingTime')
+                        .value : '';
+
+                    // Validation
+                    if (!fullName || !program || !date) {
+                        alert('Please fill out all required fields.');
+                        return;
+                    }
+
+                    // Format the message for WhatsApp
+                    const message =
+                        `Hello Mercy Roll Nation! I would like to book a session.%0A%0AName: ${fullName}%0AProgram: ${program}%0ADate: ${date}%0ATime: ${time}`;
+
+                    // WhatsApp number (without + sign)
+                    const phoneNumber = '254703169974';
+                    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+                    // Open WhatsApp in new tab
+                    window.open(whatsappUrl, '_blank');
+                });
+            }
+
+            // 3. Set minimum date for booking
+            const dateInput = document.getElementById('bookingDate');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.setAttribute('min', today);
+            }
+
+            // 4. Smooth Scrolling for Anchor Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 5. Active Navigation State
+            const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPath || (currentPath === 'index.html' && href === '#')) {
+                    link.classList.remove('text-on-surface-variant');
+                    link.classList.add('text-primary-container');
+                }
+            });
+
+            // 6. Scroll-Triggered Entrance Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        sectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-on-scroll').forEach(section => {
+                sectionObserver.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
