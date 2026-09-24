@@ -59,10 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', toggleMenu);
-        mobileMenuBtn.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            toggleMenu();
-        });
         const mobileLinks = mobileMenu.querySelectorAll('a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -79,13 +75,23 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const fullName = document.getElementById('bookingFullName').value.trim();
-            const program = document.getElementById('bookingProgram').value;
-            const date = document.getElementById('bookingDate').value;
-            const time = document.getElementById('bookingTime') ? document.getElementById('bookingTime').value : '';
+            const fullNameInput = document.getElementById('bookingFullName');
+            const programInput = document.getElementById('bookingProgram');
+            const dateInput = document.getElementById('bookingDate');
+            const timeInput = document.getElementById('bookingTime');
+
+            if (!fullNameInput || !programInput || !dateInput || !timeInput) {
+                alert('The booking form is unavailable. Please refresh and try again.');
+                return;
+            }
+
+            const fullName = fullNameInput.value.trim();
+            const program = programInput.value;
+            const date = dateInput.value;
+            const time = timeInput.value;
             
             // Validation
-            if (!fullName || !program || !date) {
+            if (!fullName || !program || !date || !time) {
                 alert('Please fill out all required fields.');
                 return;
             }
@@ -104,8 +110,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // =============================================
     const dateInput = document.getElementById('bookingDate');
     if (dateInput) {
-        const today = new Date().toISOString().split('T')[0];
+        const now = new Date();
+        const localMonth = String(now.getMonth() + 1).padStart(2, '0');
+        const localDay = String(now.getDate()).padStart(2, '0');
+        const today = `${now.getFullYear()}-${localMonth}-${localDay}`;
         dateInput.setAttribute('min', today);
+
+        dateInput.addEventListener('click', () => {
+            if (typeof dateInput.showPicker === 'function') {
+                dateInput.showPicker();
+            }
+        });
     }
 
     // =============================================
